@@ -1,18 +1,55 @@
-# React + Vite
+# VetRecall
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+VetRecall is a modern Veterinary Patient Retention & Recall SaaS platform designed to help veterinary clinics improve patient engagement, reduce missed appointments, and automate follow-up care.
 
-Currently, two official plugins are available:
+The platform enables clinics to manage pet owners, pets, appointments, vaccinations, reminders, and analytics through a secure multi-tenant dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Multi-tenant architecture
+- Clinic and staff management
+- Role-based access control
+- Pet owner and patient management
+- Appointment scheduling
+- Vaccination tracking
+- Automated reminder system
+- Analytics dashboard
+- Arabic & English support
+- RTL & LTR layouts
+- Dark & Light themes
+- Responsive design
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech Stack
 
-Note: This will impact Vite dev & build performances.
+### Frontend
 
-## Expanding the ESLint configuration
+- React
+- Tailwind CSS
+- React Router
+- i18next
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+
+- Node.js
+- Express.js
+
+### Database
+
+- Supabase (PostgreSQL)
+
+### Authentication
+
+- JWT Authentication
+
+### Deployment
+
+- Vercel
+- Supabase
+
+## Project Status
+
+Currently under active development.
+
+## Goals
+
+The objective of VetRecall is to provide veterinary clinics with a simple and efficient solution for improving patient retention and automating routine follow-up communications.
