@@ -1,20 +1,32 @@
 import {Outlet} from "react-router-dom";
+import {useContext} from "react";
+
 import Sidebar from "../components/Sidebar";
 import Header from "../components/layouts/Header";
-import {useContext} from "react";
 import SettingsContext from "../context/SettingsContext";
 
 function AppLayout() {
   const {language} = useContext(SettingsContext);
+
   return (
-    <div className="flex flex-row h-screen w-full">
+    <div className="flex w-full">
       <Sidebar />
-      <div
-        className={`w-full bg-blue-50  ${language === "en" ? "ml-0 desktop:ml-72" : "mr-0 desktop:mr-72"}`}
+
+      <main
+        className={`
+          flex-1
+          min-h-screen
+          bg-blue-50
+          dark:bg-slate-950
+          dark:text-white
+          transition-all
+          p-7
+          ${language === "en" ? "desktop:ml-72" : "desktop:mr-72"}
+        `}
       >
         <Header />
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }

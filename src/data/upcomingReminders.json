@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "title": "Rabies Vaccination",
+    "patient": "Max",
+    "type": "vaccination",
+    "channel": "Email",
+    "scheduledAt": "2026-06-25 09:00",
+    "status": "Scheduled"
+  },
+  {
+    "id": 2,
+    "title": "Annual Wellness",
+    "patient": "Buddy",
+    "type": "wellness",
+    "channel": "SMS",
+    "scheduledAt": "2026-06-24 11:00",
+    "status": "Sent"
+  },
+  {
+    "id": 3,
+    "title": "Dental Follow-up",
+    "patient": "Oliver",
+    "channel": "Email",
+    "type": "follow-up",
+    "scheduledAt": "2026-06-23 08:00",
+    "status": "Failed"
+  },
+  {
+    "id": 4,
+    "title": "Vaccination Booster",
+    "patient": "Rocky",
+    "channel": "SMS",
+    "type": "vaccination",
+    "scheduledAt": "2026-06-26 10:00",
+    "status": "Sent"
+  },
+  {
+    "id": 5,
+    "title": "Wellness Check",
+    "patient": "Daisy",
+    "channel": "Email",
+    "type": "wellness",
+    "scheduledAt": "2026-06-27 14:00",
+    "status": "Scheduled"
+  }
+]

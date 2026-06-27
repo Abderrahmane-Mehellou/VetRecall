@@ -1,0 +1,14 @@
+[
+  {"month": "Jan", "booked": 220, "completed": 200},
+  {"month": "Feb", "booked": 245, "completed": 230},
+  {"month": "Mar", "booked": 260, "completed": 235},
+  {"month": "Apr", "booked": 290, "completed": 280},
+  {"month": "May", "booked": 310, "completed": 290},
+  {"month": "Jun", "booked": 340, "completed": 320},
+  {"month": "Jul", "booked": 360, "completed": 345},
+  {"month": "Aug", "booked": 380, "completed": 365},
+  {"month": "Sep", "booked": 400, "completed": 385},
+  {"month": "Oct", "booked": 420, "completed": 400},
+  {"month": "Nov", "booked": 445, "completed": 420},
+  {"month": "Dec", "booked": 470, "completed": 455}
+]

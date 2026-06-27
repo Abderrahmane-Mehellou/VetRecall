@@ -1,0 +1,22 @@
+[
+  {
+    "week": "W1",
+    "visits": 65,
+    "recalls": 28
+  },
+  {
+    "week": "W2",
+    "visits": 72,
+    "recalls": 32
+  },
+  {
+    "week": "W3",
+    "visits": 80,
+    "recalls": 36
+  },
+  {
+    "week": "W4",
+    "visits": 88,
+    "recalls": 40
+  }
+]

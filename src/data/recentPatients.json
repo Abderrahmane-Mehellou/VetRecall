@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "initials": "MA",
+    "name": "Max",
+    "breed": "Golden Retriever",
+    "owner": "Sarah Johnson",
+    "lastVisit": "2026-05-12",
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "initials": "WH",
+    "name": "Whiskers",
+    "breed": "Maine Coon",
+    "owner": "Michael Chen",
+    "lastVisit": "2026-06-01",
+    "status": "Active"
+  },
+  {
+    "id": 3,
+    "initials": "BU",
+    "name": "Buddy",
+    "breed": "Beagle",
+    "owner": "Emily Rodriguez",
+    "lastVisit": "2026-04-22",
+    "status": "Overdue"
+  },
+  {
+    "id": 4,
+    "initials": "LU",
+    "name": "Luna",
+    "breed": "Persian",
+    "owner": "David Kim",
+    "lastVisit": "2026-05-30",
+    "status": "Active"
+  },
+  {
+    "id": 5,
+    "initials": "CH",
+    "name": "Charlie",
+    "breed": "Labrador",
+    "owner": "Jessica Patel",
+    "lastVisit": "2026-03-15",
+    "status": "Reminder Sent"
+  }
+]

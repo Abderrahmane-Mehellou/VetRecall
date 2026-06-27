@@ -7,22 +7,23 @@ import {IoIosArrowDown} from "react-icons/io";
 import {FaSearch} from "react-icons/fa";
 import {IoMenu} from "react-icons/io5";
 import {PiSignOutBold} from "react-icons/pi";
-import {useContext, useState} from "react";
+import {useContext, useRef, useState} from "react";
 import SettingsContext from "../../context/SettingsContext";
 
 function Header() {
   const {darkMode, setDarkMode, language, setLanguage} =
     useContext(SettingsContext);
+  const panelRef = useRef();
 
   const [showPanel, setShowPanel] = useState(false);
   return (
     <header
       dir={language === "en" ? "ltr" : "rtl"}
-      className="flex flex-row items-center w-full h-16 justify-between p-4 border-b border-gray-200 dark:bg-slate-900 dark:text-white"
+      className="flex flex-row fixed items-center top-0 right-0 left-72 z-50 h-16 justify-between p-4 border-b border-gray-200 bg-blue-100 dark:bg-slate-900 dark:text-white"
     >
       <div className="relative hidden flex-row items-center gap-4 desktop:flex">
         <input
-          className={`w-70 h-9 ${language === "en" ? "pl-10" : "pr-10"} rounded-full bg-gray-50 text-sm border-gray-300 shadow-2xl focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-600`}
+          className={`w-72 h-9 ${language === "en" ? "pl-10" : "pr-10"} rounded-full bg-gray-50 text-sm border-gray-300 shadow-2xl focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-600`}
           placeholder={
             language == "ar"
               ? "ابحث عن موعد, حيوان..."
@@ -30,12 +31,12 @@ function Header() {
           }
         />
         <div
-          className={`absolute ${language == "ar" ? "right-3" : "left-3"} text-gray-500`}
+          className={`absolute ${language === "ar" ? "right-3" : "left-3"} text-gray-500`}
         >
           <FaSearch />
         </div>
       </div>
-      <div className=" cursor-pointer hover:bg-gray-200 px-3 py-2 rounded-full dark:hover:bg-slate-700 mobile:flex tablet:flex desktop:hidden">
+      <div className=" cursor-pointer hover:bg-gray-200 px-3 py-2 rounded-full dark:hover:bg-slate-700 flex desktop:hidden">
         <span>
           <IoMenu />
         </span>
@@ -72,7 +73,24 @@ function Header() {
             <IoIosArrowDown />
           </div>
           {showPanel && (
-            <div className="absolute top-15 right-0 w-50 bg-white border text-black px-3 py-5 rounded-3xl gap-3">
+            <div
+              className="
+absolute
+top-15
+right-0
+z-auto
+w-56
+bg-white
+dark:bg-slate-800
+dark:text-white
+shadow-xl
+border
+border-gray-200
+dark:border-slate-700
+rounded-2xl
+p-4
+"
+            >
               <ul>
                 <li>
                   <h1 className="font-bold">Dr.Poland Alyoun</h1>
@@ -83,7 +101,7 @@ function Header() {
                 <li>{language === "en" ? "Billing" : "الفوترة"}</li>
                 <hr />
                 <li className="flex items-center gap-2 mt-3">
-                  <PiSignOutBold />
+                  <PiSignOutBold color="red" />
                   <h1>{language === "en" ? "Sign out" : "تسجيل الخروج"}</h1>
                 </li>
               </ul>

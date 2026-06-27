@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Up to date",
+    "ar": "مُحدَّث",
+    "value": 68,
+    "color": "#4CAF50"
+  },
+  {
+    "name": "Due soon",
+    "ar": "مستحق قريبًا",
+    "value": 22,
+    "color": "#F59E0B"
+  },
+  {
+    "name": "Overdue",
+    "ar": "متأخر",
+    "value": 10,
+    "color": "#EF4444"
+  }
+]

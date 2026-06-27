@@ -2,8 +2,14 @@ import {FiUsers} from "react-icons/fi";
 import {FaCalendarAlt} from "react-icons/fa";
 import {TbVaccine} from "react-icons/tb";
 import {FaArrowTrendUp} from "react-icons/fa6";
-import {MdAttachMoney} from "react-icons/md";
+import {MdArrowDropDownCircle, MdAttachMoney} from "react-icons/md";
 import {PiWarningCircleBold} from "react-icons/pi";
+
+import Charts from "../components/Charts";
+import {doc, Timestamp} from "firebase/firestore";
+import {db} from "../firebase/firebase";
+import {addOwner} from "../service/petOwner.service";
+import {addPatient} from "../service/patient.service";
 
 const stats = [
   {
@@ -57,16 +63,30 @@ const stats = [
 ];
 
 function Dashboard() {
+  async function response(e) {
+    const res = await addPatient(patients[e]);
+    console.log(res);
+  }
+
+  // for (let index = 0; index < patients.length; index++) {
+  //   response(index);
+  // }
+
   return (
-    <div className="h-auto dark:bg-slate-800 p-7">
+    <div className="h-auto mt-16">
       <div>
-        <h1 className="text-2xl font-bold">Welcome back, Dr.Poland</h1>
-        <h3>Here's how your clinic is performing today.</h3>
+        <h1 className="text-4xl font-bold">Welcome back, Dr.Poland</h1>
+        <h3 className="text-gray-500">
+          Here's how your clinic is performing today.
+        </h3>
       </div>
       <div className="flex flex-row justify-around mt-10">
         {stats.map((item) => (
           <StatCard stat={item} key={item.title} />
         ))}
+      </div>
+      <div>
+        <Charts />
       </div>
     </div>
   );
@@ -74,7 +94,7 @@ function Dashboard() {
 
 function StatCard({stat}) {
   return (
-    <div className="flex flex-col justify-between h-35 w-60 bg-white p-4 rounded-2xl">
+    <div className="flex flex-col justify-between h-35 w-60 bg-white p-4 rounded-2xl dark:bg-slate-800 dark:text-white">
       <div className="flex flex-row justify-between items-center">
         <div
           className={`flex justify-center items-center rounded-full h-10 w-10 ${stat.color_bg} ${stat.color_text}`}
@@ -84,7 +104,7 @@ function StatCard({stat}) {
         <p className="text-green-500 text-sm">%{stat.percentage}</p>
       </div>
       <div>
-        <p className="font-bold">{stat.value}</p>
+        <p className="font-bold text-2xl">{stat.value}</p>
         <p className="text-sm text-gray-500">{stat.title}</p>
       </div>
     </div>

@@ -1,0 +1,14 @@
+[
+  {"month": "Jan", "retention": 78},
+  {"month": "Feb", "retention": 80},
+  {"month": "Mar", "retention": 81},
+  {"month": "Apr", "retention": 82},
+  {"month": "May", "retention": 83},
+  {"month": "Jun", "retention": 84},
+  {"month": "Jul", "retention": 85},
+  {"month": "Aug", "retention": 85},
+  {"month": "Sep", "retention": 86},
+  {"month": "Oct", "retention": 87},
+  {"month": "Nov", "retention": 87},
+  {"month": "Dec", "retention": 87.4}
+]

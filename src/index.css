@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -9,4 +11,10 @@
   --breakpoint-desktop: 64rem; /* 1024px */
   --breakpoint-wide: 90rem; /* 1440px */
   --breakpoint-ultra: 120rem; /* 1920px */
+
+  --font-sans: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
 }
