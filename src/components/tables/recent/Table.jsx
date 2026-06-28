@@ -1,4 +1,8 @@
-import {generateInitial, getColors} from "../../../utils/helpers";
+import {
+  generateInitial,
+  getAvatarColors,
+  getColors,
+} from "../../../utils/helpers";
 
 function Table({data}) {
   return (
@@ -17,7 +21,9 @@ function TableItem({item}) {
     <>
       <div className="flex justify-between items-center mb-3 w-full h-auto">
         <div className="flex justify-between space-x-2">
-          <span className="flex justify-center items-center bg-slate-300 text-slate-500 px-3 rounded-full">
+          <span
+            className={`flex justify-center items-center ${getAvatarColors(item.status)} border px-3 rounded-full`}
+          >
             {generateInitial(item.name)}
           </span>
           <div>

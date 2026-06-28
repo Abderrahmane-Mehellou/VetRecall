@@ -1,0 +1,268 @@
+/* ===========================
+   GENERAL
+=========================== */
+
+.fc {
+  --fc-border-color: #e5e7eb;
+  --fc-page-bg-color: #ffffff;
+  --fc-neutral-bg-color: #ffffff;
+  --fc-list-event-hover-bg-color: #f8fafc;
+
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  color: #1e293b;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  overflow: hidden;
+  background: white;
+}
+
+/* Remove ugly focus borders */
+
+.fc *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ===========================
+   TOOLBAR
+=========================== */
+
+.fc .fc-toolbar {
+  margin-bottom: 25px;
+}
+
+.fc-toolbar-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.fc-button {
+  background: white !important;
+  color: #334155 !important;
+  border: 1px solid #dbe2ea !important;
+  padding: 8px 18px !important;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.fc-button:hover {
+  background: #f8fafc !important;
+}
+
+.fc-button-active {
+  background: #2563eb !important;
+  color: white !important;
+  border-color: #2563eb !important;
+}
+
+.fc-today-button {
+  border-radius: 999px !important;
+}
+
+.fc-prev-button {
+  border-radius: 999px 0 0 999px !important;
+}
+
+.fc-next-button {
+  border-radius: 0 999px 999px 0 !important;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.fc-col-header-cell {
+  background: white;
+  height: 60px;
+  padding: 15px 0;
+}
+
+.fc-col-header-cell-cushion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #64748b;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 12px;
+}
+
+.fc-col-header-cell-cushion::first-line {
+  color: #0f172a;
+}
+
+/* ===========================
+   TIME LABELS
+=========================== */
+
+.fc-timegrid-slot-label {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.fc .fc-timegrid-slot {
+  height: 35px !important;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: #edf2f7;
+}
+
+.fc-scrollgrid {
+  border: none !important;
+}
+
+.fc-timegrid-divider {
+  display: none;
+}
+
+.fc-scrollgrid-section-header th {
+  border-bottom: 1px solid #edf2f7;
+}
+
+/* ===========================
+   TODAY
+=========================== */
+
+.fc .fc-day-today {
+  background: rgba(37, 99, 235, 0.04);
+}
+
+/* ===========================
+   NOW INDICATOR
+=========================== */
+
+.fc-timegrid-now-indicator-line {
+  border-color: #2563eb;
+}
+
+.fc-timegrid-now-indicator-arrow {
+  border-left-color: #2563eb;
+}
+
+/* ===========================
+   EVENTS
+=========================== */
+
+.fc-event {
+  border: none !important;
+  border-radius: 16px;
+  padding: 0px 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  overflow: hidden;
+}
+
+.fc-event:hover {
+  transform: scale(1.02);
+}
+
+.fc-event-main {
+  padding: 2px;
+}
+
+.fc-event-time {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.fc-event-title {
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.fc-event-main {
+  color: inherit !important;
+}
+
+.fc-event-title,
+.fc-event-time {
+  color: inherit !important;
+}
+
+/* ===========================
+   EVENT COLORS
+=========================== */
+
+.vaccine {
+  background: #dbeafe !important;
+  border-left: 4px solid #2563eb !important;
+  color: #2563eb !important;
+}
+
+.dental {
+  background: #dcfce7 !important;
+  border-left: 4px solid #22c55e !important;
+  color: #22c55e !important;
+}
+
+.wellness {
+  background: #cffafe !important;
+  border-left: 4px solid #06b6d4 !important;
+  color: #06b6d4 !important;
+}
+
+.followup {
+  background: #fef3c7 !important;
+  border-left: 4px solid #f59e0b !important;
+  color: #f59e0b !important;
+}
+
+.surgery {
+  background: #fee2e2 !important;
+  border-left: 4px solid #ef4444 !important;
+  color: #ef4444 !important;
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+/* Chrome, Edge, Safari */
+.fc .fc-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.fc .fc-scroller {
+  scrollbar-width: none;
+}
+
+/* IE/Edge Legacy */
+.fc .fc-scroller {
+  -ms-overflow-style: none;
+}
+
+/* ===========================
+   DAYS
+=========================== */
+
+.fc .fc-col-header-cell-cushion {
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.fc .fc-daygrid-day-number {
+  font-size: 16px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.fc .fc-col-header-cell.fc-day-today {
+  background: #dbeafe;
+}

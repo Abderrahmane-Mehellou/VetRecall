@@ -20,6 +20,25 @@ export function getColors(value) {
   }
 }
 
+export function getAvatarColors(initials) {
+  const colors = [
+    "bg-blue-100 text-blue-600",
+    "bg-teal-100 text-teal-600",
+    "bg-purple-100 text-purple-600",
+    "bg-amber-100 text-amber-600",
+    "bg-pink-100 text-pink-600",
+    "bg-green-100 text-green-600",
+    "bg-orange-100 text-orange-600",
+    "bg-red-100 text-red-600",
+  ];
+
+  const index =
+    initials.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) %
+    colors.length;
+
+  return colors[index];
+}
+
 export function getUpcomingColors(value) {
   switch (value) {
     case "Scheduled":
