@@ -18,8 +18,6 @@
   background: white;
 }
 
-/* Remove ugly focus borders */
-
 .fc *:focus {
   outline: none !important;
   box-shadow: none !important;
@@ -58,17 +56,9 @@
   border-color: #2563eb !important;
 }
 
-.fc-today-button {
-  border-radius: 999px !important;
-}
-
-.fc-prev-button {
-  border-radius: 999px 0 0 999px !important;
-}
-
-.fc-next-button {
-  border-radius: 0 999px 999px 0 !important;
-}
+.fc-today-button   { border-radius: 999px !important; }
+.fc-prev-button    { border-radius: 999px 0 0 999px !important; }
+.fc-next-button    { border-radius: 0 999px 999px 0 !important; }
 
 /* ===========================
    HEADER
@@ -80,21 +70,20 @@
   padding: 15px 0;
 }
 
-.fc-col-header-cell-cushion {
+.fc .fc-col-header-cell-cushion {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  color: #64748b;
+  color: #0f172a;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-size: 12px;
+  font-size: 14px;
 }
 
-.fc-col-header-cell-cushion::first-line {
-  color: #0f172a;
+.fc .fc-col-header-cell.fc-day-today {
+  background: #dbeafe;
 }
 
 /* ===========================
@@ -120,13 +109,8 @@
   border-color: #edf2f7;
 }
 
-.fc-scrollgrid {
-  border: none !important;
-}
-
-.fc-timegrid-divider {
-  display: none;
-}
+.fc-scrollgrid        { border: none !important; }
+.fc-timegrid-divider  { display: none; }
 
 .fc-scrollgrid-section-header th {
   border-bottom: 1px solid #edf2f7;
@@ -144,118 +128,12 @@
    NOW INDICATOR
 =========================== */
 
-.fc-timegrid-now-indicator-line {
-  border-color: #2563eb;
-}
-
-.fc-timegrid-now-indicator-arrow {
-  border-left-color: #2563eb;
-}
+.fc-timegrid-now-indicator-line  { border-color: #2563eb; }
+.fc-timegrid-now-indicator-arrow { border-left-color: #2563eb; }
 
 /* ===========================
-   EVENTS
+   DAY NUMBERS
 =========================== */
-
-.fc-event {
-  border: none !important;
-  border-radius: 16px;
-  padding: 0px 8px;
-  cursor: pointer;
-  transition: 0.2s;
-  overflow: hidden;
-}
-
-.fc-event:hover {
-  transform: scale(1.02);
-}
-
-.fc-event-main {
-  padding: 2px;
-}
-
-.fc-event-time {
-  font-weight: 700;
-  font-size: 13px;
-}
-
-.fc-event-title {
-  font-weight: 600;
-  margin-top: 2px;
-}
-
-.fc-event-main {
-  color: inherit !important;
-}
-
-.fc-event-title,
-.fc-event-time {
-  color: inherit !important;
-}
-
-/* ===========================
-   EVENT COLORS
-=========================== */
-
-.vaccine {
-  background: #dbeafe !important;
-  border-left: 4px solid #2563eb !important;
-  color: #2563eb !important;
-}
-
-.dental {
-  background: #dcfce7 !important;
-  border-left: 4px solid #22c55e !important;
-  color: #22c55e !important;
-}
-
-.wellness {
-  background: #cffafe !important;
-  border-left: 4px solid #06b6d4 !important;
-  color: #06b6d4 !important;
-}
-
-.followup {
-  background: #fef3c7 !important;
-  border-left: 4px solid #f59e0b !important;
-  color: #f59e0b !important;
-}
-
-.surgery {
-  background: #fee2e2 !important;
-  border-left: 4px solid #ef4444 !important;
-  color: #ef4444 !important;
-}
-
-/* ===========================
-   SCROLLBAR
-=========================== */
-
-/* Chrome, Edge, Safari */
-.fc .fc-scroller::-webkit-scrollbar {
-  display: none;
-}
-
-/* Firefox */
-.fc .fc-scroller {
-  scrollbar-width: none;
-}
-
-/* IE/Edge Legacy */
-.fc .fc-scroller {
-  -ms-overflow-style: none;
-}
-
-/* ===========================
-   DAYS
-=========================== */
-
-.fc .fc-col-header-cell-cushion {
-  color: #0f172a;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  text-transform: uppercase;
-}
 
 .fc .fc-daygrid-day-number {
   font-size: 16px;
@@ -263,6 +141,67 @@
   color: #334155;
 }
 
-.fc .fc-col-header-cell.fc-day-today {
-  background: #dbeafe;
+/* ===========================
+   EVENTS — BASE
+=========================== */
+
+.fc-event {
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 0 8px;
+  cursor: pointer;
+  transition: transform 0.15s;
+  overflow: hidden;
 }
+
+.fc-event:hover        { transform: scale(1.02); }
+.fc-event-main         { padding: 2px; color: inherit !important; }
+.fc-event-time         { font-weight: 700; font-size: 13px; color: inherit !important; }
+.fc-event-title        { font-weight: 600; margin-top: 2px; color: inherit !important; }
+
+/* ===========================
+   EVENT COLORS
+=========================== */
+
+.vaccination {
+  background: #dbeafe !important;
+  border-left: 4px solid #2563eb !important;
+  color: #1d4ed8 !important;
+}
+
+.wellness {
+  background: #dcfce7 !important;
+  border-left: 4px solid #22c55e !important;
+  color: #15803d !important;
+}
+
+.follow-up {
+  background: #ccfbf1 !important;
+  border-left: 4px solid #14b8a6 !important;
+  color: #0f766e !important;
+}
+
+.dental {
+  background: #ffedd5 !important;
+  border-left: 4px solid #f97316 !important;
+  color: #c2410c !important;
+}
+
+.first-check {
+  background: #f3e8ff !important;
+  border-left: 4px solid #a855f7 !important;
+  color: #7e22ce !important;
+}
+
+.consultation {
+  background: #fef9c3 !important;
+  border-left: 4px solid #eab308 !important;
+  color: #a16207 !important;
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+.fc .fc-scroller::-webkit-scrollbar { display: none; }
+.fc .fc-scroller { scrollbar-width: none; -ms-overflow-style: none; }

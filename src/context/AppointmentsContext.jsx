@@ -3,10 +3,9 @@ import {createContext, useState} from "react";
 const AppointmentsContext = createContext();
 
 export function AppointmentsProvider({children}) {
-  const [week, setweek] = useState(0);
-  const [type, setType] = useState("Week");
+  const [week, setWeek] = useState("");
   return (
-    <AppointmentsContext.Provider value={{week, setweek, type, setType}}>
+    <AppointmentsContext.Provider value={{week, setWeek}}>
       {children}
     </AppointmentsContext.Provider>
   );

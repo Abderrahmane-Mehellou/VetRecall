@@ -11,6 +11,9 @@ import Team from "./pages/Team";
 import Notifications from "./pages/Notifications";
 import {SettingsProvider} from "./context/SettingsContext";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import { AuthProvider } from "./context/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +22,10 @@ function App() {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <SettingsProvider>
+            <AuthProvider>
           <Routes>
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="/analytics" element={<Analytics />} />
@@ -32,6 +38,7 @@ function App() {
               <Route path="/team" element={<Team />} />
             </Route>
           </Routes>
+            </AuthProvider>
         </SettingsProvider>
       </QueryClientProvider>
     </BrowserRouter>

@@ -1,7 +1,6 @@
 import {generateInitial, getAvatarColors, getColors} from "../../utils/helpers";
 
 function Row({item}) {
-  console.log(item);
   return (
     <div className="flex justify-around p-3 h-14 items-center w-full text-start border-b hover:bg-gray-100  dark:hover:bg-slate-800 transition-all">
       <div className="flex flex-2 text-sm gap-3">

@@ -1,5 +1,4 @@
 import {useQuery} from "@tanstack/react-query";
-import {TiPlus} from "react-icons/ti";
 import {getPatients} from "../service/patient.service";
 import Header from "../components/patients/Header";
 import Table from "../components/patients/Table";
@@ -43,21 +42,32 @@ function Patients() {
 
   return (
     <div className="mt-16 space-y-4">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-4xl font-bold">Patients</h1>
-          <p className="text-gray-500">
-            {filteredPatients.length} patients found
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="w-11 h-11 rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+            <i className="ti ti-paw text-blue-700 text-xl" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+              Patients
+            </h1>
+            <p className="text-sm text-gray-400 mt-0.5">
+              {isLoading
+                ? "Loading..."
+                : `${filteredPatients.length} patients found`}
+            </p>
+          </div>
         </div>
 
-        <button className="flex items-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-white transition hover:bg-blue-500 cursor-pointer">
-          <TiPlus className="text-xl" />
-          <span>Add Patient</span>
+        <button className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl transition-colors cursor-pointer">
+          <i className="ti ti-plus text-sm" />
+          Add patient
         </button>
       </div>
 
-      <div className="min-h-125 w-full rounded-3xl bg-white shadow-sm dark:bg-slate-900">
+      {/* Table card */}
+      <div className="w-full rounded-3xl bg-white shadow-sm dark:bg-slate-900">
         <Header
           setSearchQuery={setSearchQuery}
           setSpecies={setSpecies}
