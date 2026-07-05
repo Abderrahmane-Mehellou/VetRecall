@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 function Logo() {
+  const {clinic} = useAuth()
   return (
     <Link to="/" className="flex flex-row items-start space-x-4">
       <div className="w-13 h-13 rounded-full overflow-hidden object-cover">
-        <img src="/images/logo_green.png" alt="Logo" />
+        <img
+          src={clinic.logo || "/images/default-clinic-logo.png"}
+          alt="Logo"
+        />
       </div>
       <div>
         <p className="font-extrabold text-xl">

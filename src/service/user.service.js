@@ -1,11 +1,11 @@
-import {doc, getDoc} from "firebase/firestore";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 import {db} from "../firebase/firebase";
 
 export async function getUserById(uid) {
   const snapshot = await getDoc(doc(db, "users", uid));
 
   if (!snapshot.exists()) {
-    throw new Error("User not found");
+    return null;
   }
 
   return {
@@ -14,3 +14,11 @@ export async function getUserById(uid) {
   };
 }
 
+export async function createUser(userData) {
+  await setDoc(doc(db, "users", userData.uid), {
+    ...userData,
+    createdAt: new Date(),
+  });
+
+  return userData.uid;
+}

@@ -12,11 +12,31 @@ export function generateInitial(name) {
 export function getColors(value) {
   switch (value) {
     case "Active":
-      return "bg-green-100 text-green-500";
+      return "bg-green-100 text-green-500 dark:bg-green-500/10 dark:text-green-400";
     case "Overdue":
-      return "bg-red-100 text-red-500";
+      return "bg-red-100 text-red-500 dark:bg-red-500/10 dark:text-red-400";
     case "Reminder Sent":
-      return "bg-orange-100 text-orange-500";
+      return "bg-orange-100 text-orange-500 dark:bg-orange-500/10 dark:text-orange-400";
+    case "Scheduled":
+      return "bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-400";
+    case "Sent":
+      return "bg-green-100 text-green-500 dark:bg-green-500/10 dark:text-green-400";
+    case "Failed":
+      return "bg-red-100 text-red-500 dark:bg-red-500/10 dark:text-red-400";
+    case "Inactive":
+      return "bg-red-100 text-red-500 dark:bg-red-500/10 dark:text-red-400";
+    case "Invited":
+      return "bg-yellow-100 text-yellow-500 dark:bg-yellow-500/10 dark:text-yellow-400";
+    case "appointment":
+      return "bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-400";
+    case "reminder":
+      return "bg-orange-100 text-orange-500 dark:bg-orange-500/10 dark:text-orange-400";
+    case "billing":
+      return "bg-green-100 text-green-500 dark:bg-green-500/10 dark:text-green-400";
+    case "system":
+      return "bg-gray-100 text-black dark:bg-gray-500/10 dark:text-gray-300";
+    default:
+      return "bg-gray-100 text-gray-500 dark:bg-gray-500/10 dark:text-gray-400";
   }
 }
 
@@ -37,17 +57,6 @@ export function getAvatarColors(initials) {
     colors.length;
 
   return colors[index];
-}
-
-export function getUpcomingColors(value) {
-  switch (value) {
-    case "Scheduled":
-      return "bg-blue-100 text-blue-500";
-    case "Sent":
-      return "bg-green-100 text-green-500";
-    case "Failed":
-      return "bg-red-100 text-red-500";
-  }
 }
 
 export function getIconAndColor(value) {

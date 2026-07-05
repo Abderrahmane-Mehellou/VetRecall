@@ -9,13 +9,30 @@ import {IoMenu} from "react-icons/io5";
 import {PiSignOutBold} from "react-icons/pi";
 import {useContext, useRef, useState} from "react";
 import SettingsContext from "../../context/SettingsContext";
+import { useAuth } from "../../hooks/useAuth";
+import { signOutUser } from "../../service/auth.service";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Header() {
+  const navigation = useNavigate()
   const {darkMode, setDarkMode, language, setLanguage} =
     useContext(SettingsContext);
   const panelRef = useRef();
+  const {user, clinic} = useAuth();
+  const firstName = user?.fullName.split(" ")[0] || "User";
+  const secondName = user?.fullName.split(" ")[1] || "User";
 
   const [showPanel, setShowPanel] = useState(false);
+
+  // Function to handle sign out
+  async function handleSignOut(e) {
+    e.preventDefault();
+    await signOutUser();
+    console.log("Sign out clicked");
+    navigation("/login");
+    toast.success("Signed out successfully!");
+  }
   return (
     <header
       dir={language === "en" ? "ltr" : "rtl"}
@@ -69,7 +86,7 @@ function Header() {
             PA
           </div>
           <div className="hidden tablet:flex desktop:flex flex-row gap-2">
-            <p className="text-sm font-medium">Poland Alyoun</p>
+            <p className="text-sm font-medium">Dr. {firstName}</p>
             <IoIosArrowDown />
           </div>
           {showPanel && (
@@ -93,14 +110,14 @@ p-4
             >
               <ul>
                 <li>
-                  <h1 className="font-bold">Dr.Poland Alyoun</h1>
+                  <h1 className="font-bold">Dr.{firstName} {secondName}</h1>
                   <p className="font-thin text-sm">clinic Owner</p>
                 </li>
                 <hr />
                 <li>{language === "en" ? "Profile Settings" : "الإعدادات"}</li>
                 <li>{language === "en" ? "Billing" : "الفوترة"}</li>
                 <hr />
-                <li className="flex items-center gap-2 mt-3">
+                <li className="flex items-center gap-2 mt-3" onClick={(e) => handleSignOut(e)}>
                   <PiSignOutBold color="red" />
                   <h1>{language === "en" ? "Sign out" : "تسجيل الخروج"}</h1>
                 </li>

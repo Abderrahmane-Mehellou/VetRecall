@@ -5,6 +5,7 @@ import {FaArrowTrendUp} from "react-icons/fa6";
 import {MdAttachMoney} from "react-icons/md";
 import {PiWarningCircleBold} from "react-icons/pi";
 import Charts from "../components/Charts";
+import {useAuth} from "../hooks/useAuth";
 
 const stats = [
   {
@@ -64,12 +65,16 @@ const stats = [
 ];
 
 function Dashboard() {
+  const {user, clinic} = useAuth();
+
+  const name = user?.fullName.split(" ")[0] || "User";
+
   return (
     <div className="mt-16 space-y-8">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          Welcome back, Dr. Poland
+          Welcome back, {`Dr. ${name}`}!
         </h1>
         <p className="text-sm text-gray-400 mt-1">
           Here's how your clinic is performing today.

@@ -2,7 +2,6 @@ import {
   generateInitial,
   getColors,
   getIconAndColor,
-  getUpcomingColors,
 } from "../../../utils/helpers";
 
 function Table({data}) {
@@ -40,7 +39,7 @@ function TableItem({item}) {
           </div>
         </div>
         <div
-          className={`flex justify-center items-center ${getUpcomingColors(item.status)} px-3 h-7  rounded-full border`}
+          className={`flex justify-center items-center ${getColors(item.status)} px-3 h-7  rounded-full border`}
         >
           {item.status}
         </div>

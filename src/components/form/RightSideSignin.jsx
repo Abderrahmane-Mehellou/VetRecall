@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {
   FiMail,
   FiLock,
@@ -11,6 +11,13 @@ import {
 } from "react-icons/fi";
 import {HiOutlineOfficeBuilding} from "react-icons/hi";
 import PhoneCountryRow from "./PhoneCountryRow"
+import toast from "react-hot-toast";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { registerUser } from "../../service/auth.service";
+import { useAuth } from "../../hooks/useAuth";
+import { createClinic, getClinicById } from "../../service/clinic.service";
+import { auth } from "../../firebase/firebase";
+import { createUser, getUserById } from "../../service/user.service";
 
 function RightSideSignin() {
   return (
@@ -38,9 +45,12 @@ function Header() {
 }
 
 function Form() {
+  const navigation = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const {setUser, setClinic, firebaseUser} = useAuth();
   const [formData, setFormData] = useState({
     clinicName: "",
     fullName: "",
@@ -68,16 +78,68 @@ function Form() {
     if (!agreed) return;
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
     console.log(formData)
-    // try {
+    try {
     //   // 1. Create Firebase Authentication account
+      const firebaseUser = await registerUser({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    //   // 2. Create Clinic document
+      const clinicData = {
+        name: formData.clinicName,
+        email: formData.email,
+        phone: formData.phone,
+        country: formData.country,
+        city: "",
+        address: "",
+        createdBy: firebaseUser.uid,
+      };
 
+      const clinicId = await createClinic(clinicData);
+
+      const userData = {
+        uid: firebaseUser.uid,
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        clinicId,
+        role: "owner",
+        lastLogin: new Date(),
+        avatar: `https://api.dicebear.com/9.x/personas/svg?seed=${encodeURIComponent(
+          formData.fullName,
+        )}&backgroundColor=FDFDFD`,
+      };
+
+      await createUser(userData);
+      
+
+      onAuthStateChanged(auth, async (firebaseUser) => {
+        if (firebaseUser) {
+          const currentUser = await getUserById(firebaseUser.uid);
+          setUser(currentUser);
+
+          if (currentUser?.clinicId) {
+            const currentClinic = await getClinicById(currentUser.clinicId);
+            setClinic(currentClinic);
+          }
+        }
+      });
+
+      // 3. creating User document
+        
+
+        navigation("/");
+        toast.success("Account created successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Error creating account: " + err.message);
+    }
+    
     //   // 3. Create User document
 
     //   // 4. Navigate to dashboard
