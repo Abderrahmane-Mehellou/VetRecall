@@ -36,7 +36,7 @@ function Header() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  async function handleSignOut() {
+  async function handleSignOut(e) {
     e.preventDefault()
     try {
       await signOutUser();
@@ -204,7 +204,7 @@ function Header() {
 
               <button
                 type="button"
-                onClick={handleSignOut}
+                onClick={(e) => handleSignOut(e)}
                 className="flex items-center gap-2.5 w-full px-2.5 py-2 rounded-lg text-sm
                            text-red-600 dark:text-red-400
                            hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors cursor-pointer"
