@@ -27,10 +27,14 @@ export function AuthProvider({children}) {
         setFirebaseUser(firebaseUser);
 
         const currentUser = await getUserById(firebaseUser.uid);
+
+
         setUser(currentUser);
 
         if (currentUser?.clinicId) {
+
           const currentClinic = await getClinicById(currentUser.clinicId);
+
           setClinic(currentClinic);
         }
 

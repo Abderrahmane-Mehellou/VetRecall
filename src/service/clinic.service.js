@@ -1,5 +1,5 @@
 import {db} from "../firebase/firebase";
-import {collection, addDoc, doc, getDoc, serverTimestamp, updateDoc} from "firebase/firestore";
+import {collection, addDoc, doc, getDoc, serverTimestamp, updateDoc, query, where, getDocs} from "firebase/firestore";
 
 export async function createClinic(clinicData) {
   const docRef = await addDoc(collection(db, "clinics"), {
@@ -8,6 +8,23 @@ export async function createClinic(clinicData) {
   });
 
   return docRef.id;
+}
+
+export async function getUserClinicById(uid) {
+  const q = query(collection(db, "clinics"), where("createdBy", "==", uid));
+
+  const snapshot = await getDocs(q);
+
+  if (snapshot.empty) {
+    return null;
+  }
+
+  const clinicDoc = snapshot.docs[0];
+
+  return {
+    id: clinicDoc.id,
+    ...clinicDoc.data(),
+  };
 }
 
 export async function getClinicById(clinicId) {

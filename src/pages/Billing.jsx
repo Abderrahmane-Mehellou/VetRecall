@@ -1,12 +1,34 @@
+import {useState} from "react";
 import {FaCheck} from "react-icons/fa";
-import { MdInsertPhoto } from "react-icons/md";
-import { useAuth } from "../hooks/useAuth";
+import {useAuth} from "../hooks/useAuth";
+import { updateClinic } from "../service/clinic.service";
 
 function Billing() {
+  const {clinic, setClinic, refreshClinic} = useAuth();
+  const [selectedAction, setSelectedAction] = useState(null); // { plan, action } or null
+
+  async function handleSelectPlan(plan, cta) {
+    if (cta.disabled) return;
+    setSelectedAction({plan, action: cta.action});
+    // TODO: open confirmation modal / trigger checkout flow / call your billing API here
+    console.log("Selected:", plan.id, cta.action);
+
+    await updateClinic(clinic.id, {
+        plan: plan.id,
+      });
+
+    setClinic((prev) => ({
+      ...prev,
+      plan: plan.id
+    }))
+
+    await refreshClinic()
+  }
+
   return (
     <div className="mt-16 space-y-8 max-w-[1600px] px-6">
       <Header />
-      <PricingCards />
+      <PricingCards onSelect={handleSelectPlan} />
     </div>
   );
 }
@@ -25,6 +47,7 @@ function Header() {
     </div>
   );
 }
+
 const plans = [
   {
     id: "starter",
@@ -39,7 +62,6 @@ const plans = [
       "Basic analytics",
       "1 user",
     ],
-    
   },
   {
     id: "professional",
@@ -55,7 +77,6 @@ const plans = [
       "10 users",
       "Priority support",
     ],
-    
   },
   {
     id: "enterprise",
@@ -71,58 +92,45 @@ const plans = [
       "SSO + audit logs",
       "Dedicated CSM",
     ],
-    
   },
 ];
 
+function getCta(clinicPlanId, targetPlanId) {
+  if (clinicPlanId === targetPlanId) {
+    return {label: "Current plan", action: "none", disabled: true};
+  }
+
+  const currentIndex = plans.findIndex((p) => p.id === clinicPlanId);
+  const targetIndex = plans.findIndex((p) => p.id === targetPlanId);
+  const isUpgrade = targetIndex > currentIndex;
+
+  return {
+    label: isUpgrade ? "Upgrade" : "Downgrade",
+    action: isUpgrade ? "upgrade" : "downgrade",
+    disabled: false,
+  };
+}
+
 function PricingCard({plan, onSelect}) {
   const {clinic} = useAuth();
-  const {
-    name,
-    description,
-    price,
-    currency,
-    billingPeriod,
-    features,
-  } = plan;
-
-
-  function getCta(clinicPlanId, targetPlanId) {
-    if (clinicPlanId === targetPlanId) {
-      return {
-        label: "Current plan",
-        action: "none",
-        disabled: true,
-      };
-    }
-
-    const currentIndex = plans.findIndex((plan) => plan.id === clinicPlanId);
-
-    const targetIndex = plans.findIndex((plan) => plan.id === targetPlanId);
-
-    const isUpgrade = targetIndex > currentIndex;
-
-    return {
-      label: isUpgrade ? "Upgrade" : "Downgrade",
-      action: isUpgrade ? "upgrade" : "downgrade",
-      disabled: false,
-    };
-  }
+  const {name, description, price, currency, billingPeriod, features} = plan;
+  const isCurrent = clinic?.plan === plan.id;
+  const cta = getCta(clinic?.plan, plan.id);
 
   return (
     <div
       className={`relative flex flex-col bg-white dark:bg-slate-800 rounded-2xl p-6
-                  border transition-shadow duration-700 hover:scale-105
+                  border transition-all duration-300 hover:-translate-y-1
                   ${
-                    clinic.plan === plan.id
-                      ? "border-indigo-500 shadow-md"
+                    isCurrent
+                      ? "border-blue-500 shadow-md"
                       : "border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md"
                   }`}
     >
-      {clinic.plan === plan.id && (
+      {isCurrent && (
         <span
           className="absolute -top-3 left-6 px-3 py-1 rounded-full text-xs font-semibold
-                          text-white bg-indigo-600"
+                          text-white bg-blue-600"
         >
           Current
         </span>
@@ -159,16 +167,16 @@ function PricingCard({plan, onSelect}) {
 
       <button
         type="button"
-        disabled={clinic.plan === plan.id}
-        onClick={() => onSelect(plan)}
+        disabled={cta.disabled}
+        onClick={() => onSelect(plan, cta)}
         className={`mt-8 w-full py-2.5 rounded-lg text-sm font-medium transition-colors duration-150
                     ${
-                      clinic.plan === plan.id
+                      cta.disabled
                         ? "bg-slate-100 dark:bg-slate-700 text-slate-400 dark:text-slate-500 cursor-not-allowed"
-                        : "bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer"
+                        : "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
                     }`}
       >
-        {getCta(clinic.plan, plan.id).label}
+        {cta.label}
       </button>
     </div>
   );
@@ -182,11 +190,4 @@ function PricingCards({onSelect}) {
       ))}
     </div>
   );
-}
-
-function PaymentSection(){
-  return (
-    <div> 
-    </div>
-  )
 }

@@ -5,6 +5,7 @@ import { loginUser, signInWithGoogle } from "../../service/auth.service";
 import Spinner from "../../ui/Spinner";
 import { useAuth } from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { getUserClinicById } from "../../service/clinic.service";
 // this is for login page
 function RightSideLogin() {
     return (
@@ -72,7 +73,7 @@ function Form() {
 
       setIsLoading(true);
 
-      await loginUser(formData);
+      const her = await loginUser(formData);
 
       toast.success("Welcome back!");
     } catch (err) {

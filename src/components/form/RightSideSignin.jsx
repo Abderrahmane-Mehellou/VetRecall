@@ -97,6 +97,7 @@ function Form() {
         country: formData.country,
         city: "",
         address: "",
+        plan: "",
         createdBy: firebaseUser.uid,
       };
 
