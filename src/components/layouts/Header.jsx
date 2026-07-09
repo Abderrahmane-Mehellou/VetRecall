@@ -50,7 +50,7 @@ function Header() {
 
   function handleNavigate(e) {
     e.preventDefault();
-    navigate("notifications");
+    navigate("/notifications");
   }
 
   const isRtl = language !== "en";
@@ -126,7 +126,7 @@ function Header() {
         <button
           type="button"
           aria-label="Notifications"
-          onClick={handleNavigate}
+          onClick={(e) => handleNavigate(e)}
           className="relative w-9 h-9 flex items-center justify-center rounded-full
              text-slate-600 dark:text-slate-300
              hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors cursor-pointer"
