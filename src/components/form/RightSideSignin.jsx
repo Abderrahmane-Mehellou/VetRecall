@@ -33,9 +33,9 @@ export default RightSideSignin;
 
 function Header() {
   return (
-    <div className="flex flex-col items-center justify-center pt-10 h-1/4">
+    <div className="flex flex-col items-center pt-10 h-1/4 mb-5">
       <h1 className="text-3xl font-bold text-slate-900">
-        Create your VetRecall Account
+        Create your Vet<span className="text-blue-600">Recall</span> Account
       </h1>
       <p className="text-gray-500 mt-2">
         Start managing your veterinary clinic in minutes.
@@ -130,24 +130,16 @@ function Form() {
         }
       });
 
-      // 3. creating User document
         
 
         navigation("/");
+
         toast.success("Account created successfully!");
     } catch (err) {
       console.error(err);
       toast.error("Error creating account: " + err.message);
     }
-    
-    //   // 3. Create User document
 
-    //   // 4. Navigate to dashboard
-
-    //   console.log(formData);
-    // } catch (err) {
-    //   console.error(err);
-    // }
   }
 
   return (

@@ -24,6 +24,7 @@ import {  Toaster } from "react-hot-toast";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PageNotFound from "./pages/PageNotFound";
 import { Profile } from "./components/settings/Profile";
+import { NotificationsProvider } from "./context/NotificationsContext";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function App() {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <SettingsProvider>
+          <NotificationsProvider>
           <AuthProvider>
             <Toaster position="top-center" />
             <Routes>
@@ -44,14 +46,14 @@ function App() {
                   <Route path="analytics" element={<Analytics />} />
                   <Route path="settings" element={<Settings />}>
                     <Route index element={<Profile />} />
-                    {/* <Route
+                    <Route
                       path="notification"
                       element={<SettingsNotification />}
-                    />
-                    <Route path="subscription" element={<Subscription />} />
+                      />
+                    <Route path="subscription" element={<Subscription />} /> 
                     <Route path="billing" element={<SettingsBilling />} />
                     <Route path="users" element={<Users />} />
-                    <Route path="roles" element={<Roles />} /> */}
+                    <Route path="roles" element={<Roles />} /> 
                   </Route>
                   <Route path="notifications" element={<Notifications />} />
                   <Route path="patients" element={<Patients />} />
@@ -63,6 +65,7 @@ function App() {
               </Route>
             </Routes>
           </AuthProvider>
+          </NotificationsProvider>
         </SettingsProvider>
       </QueryClientProvider>
     </BrowserRouter>

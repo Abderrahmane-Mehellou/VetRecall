@@ -1,4 +1,5 @@
 import {useContext} from "react";
+import {TbCalendarPlus, TbPlus} from "react-icons/tb";
 import SettingsContext from "../../context/SettingsContext";
 import {getIconAndColor} from "../../utils/helpers";
 import "../../styles/calender.css";
@@ -20,22 +21,28 @@ function AddScheduled({onAdd}) {
   const {language} = useContext(SettingsContext);
 
   return (
-    <div className="flex flex-col flex-1 w-full px-6 py-6 bg-white rounded-3xl dark:bg-slate-800">
+    <div
+      className="flex flex-col flex-1 w-full px-6 py-6 bg-white dark:bg-slate-800 rounded-3xl
+                     border border-slate-200 dark:border-slate-700 shadow-sm"
+    >
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h1 className="text-base font-semibold dark:text-white">
+          <h1 className="text-base font-semibold text-slate-900 dark:text-white">
             {language === "en" ? "Quick add" : "إضافة سريعة"}
           </h1>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
             {language === "en"
               ? "Select a type to schedule"
               : "اختر نوع الموعد"}
           </p>
         </div>
-        <i className="ti ti-calendar-plus text-xl text-gray-400" />
+        <TbCalendarPlus
+          className="text-slate-400 dark:text-slate-500"
+          size={22}
+        />
       </div>
 
-      <div className="flex flex-col gap-2 overflow-y-auto scrollbar-none">
+      <div className="flex flex-col gap-2 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {appointmentTypes.map((item) => (
           <AppointmentItem key={item.value} item={item} onAdd={onAdd} />
         ))}
@@ -51,26 +58,39 @@ function AppointmentItem({item, onAdd}) {
   const [bgColor, textColor] = colors.split(" ");
 
   return (
-    <div
+    <button
+      type="button"
       onClick={() => onAdd?.(item)}
-      className="group flex items-center gap-3 px-3 py-2.5 rounded-2xl border border-black/10 hover:border-black/20 hover:bg-gray-50 dark:border-white/10 dark:hover:bg-slate-700 transition-all cursor-pointer"
+      className="group flex items-center gap-3 w-full px-3 py-2.5 rounded-2xl text-left
+                 border border-slate-200 dark:border-slate-600
+                 hover:border-slate-300 dark:hover:border-slate-500
+                 hover:bg-slate-50 dark:hover:bg-slate-700
+                 transition-all duration-150 cursor-pointer"
     >
       <div
-        className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${bgColor}`}
+        className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${bgColor}`}
       >
         <Icon className={`text-base ${textColor}`} />
       </div>
 
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-gray-800 dark:text-white">
+        <p className="text-sm font-medium text-slate-800 dark:text-white truncate">
           {item.name}
         </p>
-        <p className="text-xs text-gray-400 mt-0.5">{item.desc}</p>
+        <p className="text-xs text-slate-400 dark:text-slate-400 mt-0.5 truncate">
+          {item.desc}
+        </p>
       </div>
 
-      <div className="w-7 h-7 rounded-lg border border-black/10 bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all flex-shrink-0">
-        <i className="ti ti-plus text-sm" />
+      <div
+        className="w-7 h-7 rounded-lg border border-slate-200 dark:border-slate-500
+                       bg-slate-50 dark:bg-slate-800 flex items-center justify-center
+                       text-slate-400 dark:text-slate-300
+                       group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600
+                       transition-all duration-150 shrink-0"
+      >
+        <TbPlus size={14} />
       </div>
-    </div>
+    </button>
   );
 }

@@ -1,9 +1,10 @@
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signInWithPopup,
 } from "firebase/auth";
-import {auth} from "../firebase/firebase";
-import {getClinicById} from "./clinic.service";
+import {auth, db, googleProvider} from "../firebase/firebase";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 
 export async function registerUser(userData) {
   const {email, password} = userData;
@@ -19,6 +20,29 @@ export async function registerUser(userData) {
   }
 }
 
+export async function signInWithGoogle() {
+  const result = await signInWithPopup(auth, googleProvider);
+
+  const user = result.user;
+
+  const ref = doc(db, "users", user.uid);
+
+  const snapshot = await getDoc(ref);
+
+  if (!snapshot.exists()) {
+    await setDoc(ref, {
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
+      provider: "google",
+      createdAt: serverTimestamp(),
+    });
+  }
+
+  return user;
+}
+
 export async function loginUser(userData) {
   const {email, password} = userData;
   try {
@@ -29,7 +53,9 @@ export async function loginUser(userData) {
     );
     return userCredential.user;
   } catch (error) {
-    throw new Error(error.message);
+    console.error(error.code)
+    console.error(error.message)
+    throw error
   }
 }
 

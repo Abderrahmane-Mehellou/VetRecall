@@ -2,9 +2,10 @@ import {useContext} from "react";
 import SettingsContext from "../../../context/SettingsContext";
 import Table from "./Table";
 
-import recentPatients from "../../../data/recentPatients.json";
+import { usePatients } from "../../../hooks/usePatients";
 
 function RecentTable() {
+  const {data: patients, isLoading} = usePatients();
   const {language} = useContext(SettingsContext);
   return (
     <div className="flex items-stretch justify-center col-span-4 flex-col w-full h-112.5 px-10 bg-white rounded-3xl dark:bg-slate-800 dark:text-white">
@@ -19,7 +20,7 @@ function RecentTable() {
         </h2>
       </div>
       <div className="w-full h-80 mt-6 overflow-scroll scrollbar-none">
-        <Table data={recentPatients} />
+        <Table data={patients} isLoading={isLoading} />
       </div>
     </div>
   );

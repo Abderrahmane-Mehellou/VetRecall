@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {FiMail, FiLock, FiEye, FiEyeOff} from "react-icons/fi";
-import { loginUser } from "../../service/auth.service";
+import { loginUser, signInWithGoogle } from "../../service/auth.service";
 import Spinner from "../../ui/Spinner";
 import { useAuth } from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -52,7 +52,7 @@ function Form() {
     if (!loading && firebaseUser) {
       navigator("/");
     }
-  }, [firebaseUser, loading]);
+  }, [firebaseUser, loading, navigator]);
 
   const handleChange = (e) => {
     setFormData({
@@ -61,7 +61,9 @@ function Form() {
     });
   }
 
-  async function handleSignIn() {
+  async function handleSignIn(e) {
+    e.preventDefault();
+
     try {
       if (!formData.email || !formData.password) {
         toast.error("Please fill in all fields.");
@@ -73,8 +75,6 @@ function Form() {
       await loginUser(formData);
 
       toast.success("Welcome back!");
-
-      navigator("/");
     } catch (err) {
       switch (err.code) {
         case "auth/invalid-credential":
@@ -95,6 +95,27 @@ function Form() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function handleSignInWithGoogle(e) {
+    e.preventDefault();
+     try {
+       await signInWithGoogle();
+
+       toast.success("Welcome!");
+
+       navigator("/");
+     } catch (error) {
+       toast.error(error.message);
+     }
+  }
+
+  if (loading) {
+    return <Spinner size="lg" color="teal" />;
+  }
+
+  if (firebaseUser) {
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -172,7 +193,7 @@ function Form() {
         {/* Sign In button */}
         <button
           className="w-full h-12 rounded-full bg-blue-400 hover:bg-blue-500 text-white font-medium text-sm transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-70"
-          onClick={handleSignIn}
+          onClick={(e) => handleSignIn(e)}
           disabled={isLoading}
         >
           {isLoading ? (
@@ -194,25 +215,16 @@ function Form() {
 
         {/* Social buttons */}
         <div className="flex flex-col gap-2">
-          <button className="w-full h-11 rounded-full border border-gray-200 hover:bg-gray-50 text-sm text-slate-700 font-medium flex items-center justify-center gap-3 cursor-pointer transition-colors">
+          <button
+            className="w-full h-11 rounded-full border border-gray-200 hover:bg-gray-50 text-sm text-slate-700 font-medium flex items-center justify-center gap-3 cursor-pointer transition-colors"
+            onClick={(e) => handleSignInWithGoogle(e)}
+          >
             <img
               src="https://www.google.com/favicon.ico"
               className="w-4 h-4"
               alt="Google"
             />
             Continue with Google
-          </button>
-          <button className="w-full h-11 rounded-full border border-gray-200 hover:bg-gray-50 text-sm text-slate-700 font-medium flex items-center justify-center gap-3 cursor-pointer transition-colors">
-            <span className="text-base"></span>
-            Continue with Apple
-          </button>
-          <button className="w-full h-11 rounded-full border border-gray-200 hover:bg-gray-50 text-sm text-slate-700 font-medium flex items-center justify-center gap-3 cursor-pointer transition-colors">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
-              className="w-4 h-4"
-              alt="Microsoft"
-            />
-            Continue with Microsoft
           </button>
         </div>
       </div>

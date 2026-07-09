@@ -1,4 +1,6 @@
 import {FaCheck} from "react-icons/fa";
+import { MdInsertPhoto } from "react-icons/md";
+import { useAuth } from "../hooks/useAuth";
 
 function Billing() {
   return (
@@ -31,17 +33,13 @@ const plans = [
     price: 49,
     currency: "USD",
     billingPeriod: "mo",
-    isCurrent: false,
     features: [
       "Up to 500 patients",
       "Email reminders",
       "Basic analytics",
       "1 user",
     ],
-    cta: {
-      label: "Downgrade",
-      action: "downgrade",
-    },
+    
   },
   {
     id: "professional",
@@ -50,8 +48,6 @@ const plans = [
     price: 149,
     currency: "USD",
     billingPeriod: "mo",
-    isCurrent: true,
-    badge: "Current",
     features: [
       "Up to 5,000 patients",
       "Email + SMS reminders",
@@ -59,11 +55,7 @@ const plans = [
       "10 users",
       "Priority support",
     ],
-    cta: {
-      label: "Current plan",
-      action: "none",
-      disabled: true,
-    },
+    
   },
   {
     id: "enterprise",
@@ -72,7 +64,6 @@ const plans = [
     price: 399,
     currency: "USD",
     billingPeriod: "mo",
-    isCurrent: false,
     features: [
       "Unlimited patients",
       "Omnichannel reminders",
@@ -80,42 +71,60 @@ const plans = [
       "SSO + audit logs",
       "Dedicated CSM",
     ],
-    cta: {
-      label: "Upgrade",
-      action: "upgrade",
-    },
+    
   },
 ];
 
 function PricingCard({plan, onSelect}) {
+  const {clinic} = useAuth();
   const {
     name,
     description,
     price,
     currency,
     billingPeriod,
-    isCurrent,
-    badge,
     features,
-    cta,
   } = plan;
+
+
+  function getCta(clinicPlanId, targetPlanId) {
+    if (clinicPlanId === targetPlanId) {
+      return {
+        label: "Current plan",
+        action: "none",
+        disabled: true,
+      };
+    }
+
+    const currentIndex = plans.findIndex((plan) => plan.id === clinicPlanId);
+
+    const targetIndex = plans.findIndex((plan) => plan.id === targetPlanId);
+
+    const isUpgrade = targetIndex > currentIndex;
+
+    return {
+      label: isUpgrade ? "Upgrade" : "Downgrade",
+      action: isUpgrade ? "upgrade" : "downgrade",
+      disabled: false,
+    };
+  }
 
   return (
     <div
       className={`relative flex flex-col bg-white dark:bg-slate-800 rounded-2xl p-6
                   border transition-shadow duration-700 hover:scale-105
                   ${
-                    isCurrent
+                    clinic.plan === plan.id
                       ? "border-indigo-500 shadow-md"
                       : "border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md"
                   }`}
     >
-      {badge && (
+      {clinic.plan === plan.id && (
         <span
           className="absolute -top-3 left-6 px-3 py-1 rounded-full text-xs font-semibold
                           text-white bg-indigo-600"
         >
-          {badge}
+          Current
         </span>
       )}
 
@@ -150,16 +159,16 @@ function PricingCard({plan, onSelect}) {
 
       <button
         type="button"
-        disabled={cta.disabled}
+        disabled={clinic.plan === plan.id}
         onClick={() => onSelect(plan)}
         className={`mt-8 w-full py-2.5 rounded-lg text-sm font-medium transition-colors duration-150
                     ${
-                      cta.disabled
+                      clinic.plan === plan.id
                         ? "bg-slate-100 dark:bg-slate-700 text-slate-400 dark:text-slate-500 cursor-not-allowed"
                         : "bg-indigo-600 text-white hover:bg-indigo-700 cursor-pointer"
                     }`}
       >
-        {cta.label}
+        {getCta(clinic.plan, plan.id).label}
       </button>
     </div>
   );
@@ -173,4 +182,11 @@ function PricingCards({onSelect}) {
       ))}
     </div>
   );
+}
+
+function PaymentSection(){
+  return (
+    <div> 
+    </div>
+  )
 }

@@ -21,7 +21,7 @@ function AppLayout() {
           dark:text-white
           transition-all
           p-7
-          ${language === "en" ? "desktop:ml-72" : "desktop:mr-72"}
+          ${language === "en" ? "ml-72" : "mr-72"}
         `}
       >
         <Header />
