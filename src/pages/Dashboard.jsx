@@ -37,7 +37,7 @@ function Dashboard() {
     {
       title: "Total patients",
       value: patients.length,
-      percentage: 8.2,
+      percentage: `${patients.length === 0 ? 0 : 8.2}`,
       icon: FiUsers,
       color_bg: "bg-blue-100",
       color_text: "text-blue-600",
@@ -46,7 +46,7 @@ function Dashboard() {
     {
       title: "Upcoming appointments",
       value: appointments.length,
-      percentage: 12,
+      percentage: `${appointments.length === 0 ? 0 : 5.1}`,
       icon: FaCalendarAlt,
       color_bg: "bg-teal-100",
       color_text: "text-teal-600",
@@ -55,7 +55,7 @@ function Dashboard() {
     {
       title: "Vaccinations due",
       value: vaccin,
-      percentage: 3,
+      percentage: `${vaccin === 0 ? 0 : 2.3}`,
       icon: TbVaccine,
       color_bg: "bg-orange-100",
       color_text: "text-orange-600",
@@ -64,7 +64,7 @@ function Dashboard() {
     {
       title: "Retention rate",
       value: `${retentionRate}%`,
-      percentage: 1.4,
+      percentage: `${retentionRate === 0 ? 0 : 0.6}`,
       icon: FaArrowTrendUp,
       color_bg: "bg-green-100",
       color_text: "text-green-600",
@@ -73,7 +73,7 @@ function Dashboard() {
     {
       title: "No-show rate",
       value: `${noShowRate}%`,
-      percentage: 0.6,
+      percentage: `${noShowRate === 0 ? 0 : 7.6}`,
       icon: PiWarningCircleBold,
       color_bg: "bg-red-100",
       color_text: "text-red-600",

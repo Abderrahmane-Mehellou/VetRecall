@@ -44,11 +44,11 @@ function Header() {
 
 const navigationItems = [
   { id: 1, name: "Profile", icon: CgProfile, href: "/settings" },
-  { id: 2, name: "Notification", icon: IoNotificationsOutline, href: "/settings/notification" },
-  { id: 3, name: "Subscription", icon: MdWorkspacePremium, href: "/settings/subscription" },
-  { id: 4, name: "Billing", icon: FiCreditCard, href: "/settings/billing" },
-  { id: 5, name: "Users", icon: FiUsers, href: "/settings/users" },
-  { id: 6, name: "Roles & permissions", icon: LuNetwork, href: "/settings/roles" },
+  // { id: 2, name: "Notification", icon: IoNotificationsOutline, href: "/settings/notification" },
+  // { id: 3, name: "Subscription", icon: MdWorkspacePremium, href: "/settings/subscription" },
+  // { id: 4, name: "Billing", icon: FiCreditCard, href: "/settings/billing" },
+  // { id: 5, name: "Users", icon: FiUsers, href: "/settings/users" },
+  // { id: 6, name: "Roles & permissions", icon: LuNetwork, href: "/settings/roles" },
 ];
 
 function Navigation() {
