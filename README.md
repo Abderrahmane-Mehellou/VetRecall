@@ -28,14 +28,9 @@ The platform enables clinics to manage pet owners, pets, appointments, vaccinati
 - React Router
 - i18next
 
-### Backend
-
-- Node.js
-- Express.js
-
 ### Database
 
-- Supabase (PostgreSQL)
+- Firebase
 
 ### Authentication
 
@@ -44,7 +39,7 @@ The platform enables clinics to manage pet owners, pets, appointments, vaccinati
 ### Deployment
 
 - Vercel
-- Supabase
+- Firebase
 
 ## Project Status
 
